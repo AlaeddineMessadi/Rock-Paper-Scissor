@@ -5,11 +5,13 @@ import rock from "../../assets/weapons/rock.svg";
 import paper from "../../assets/weapons/paper.svg";
 import scissors from "../../assets/weapons/scissors.svg";
 import question from "../../assets/weapons/question.svg";
+import loading from "../../assets/weapons/loading.svg";
+
 
 // import Loading from 'components/Loading';
 
 const weapon = props => {
-  const choosenWeapon = () => {
+  const choseWeapon = () => {
     switch (props.type) {
       case "rock":
         return rock;
@@ -22,11 +24,11 @@ const weapon = props => {
     }
   };
 
-
+  console.log(props.loading)
   return (
     <div>
-      <img src={choosenWeapon()} />
-      <span>{props.type}</span>
+      <img src={ props.loading ? loading : choseWeapon() } />
+      <span>{ props.type }</span>
     </div>
   );
 };

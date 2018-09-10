@@ -12,16 +12,17 @@ export class Game extends Component {
   render() {
     const players = [this.props.game.player1, this.props.game.player2];
     return (
-      <main className={classes.Game}>
-        {players.map((player, index) => (
-          <div className={classes.Player} key={index}>
+      <main className={ classes.Game }>
+        { players.map((player, index) => (
+          <div className={ classes.Player } key={ index }>
             <Player
-              label={player.label}
-              weapon={player.weapon}
-              score={player.score}
+              label={ player.label }
+              weapon={ player.weapon }
+              score={ player.score }
+              loading={ player.loading }
             />
           </div>
-        ))}
+        )) }
       </main>
     );
   }

@@ -67,7 +67,12 @@ class GameStore {
   // Pick Weapon for user1 (Human)
   @action
   pickWeapon(weapon) {
-    this.player1.weapon = weapon;
+    this.player1.loading = true;
+    setTimeout(() => {
+      this.player1.loading = false;
+      this.player1.weapon = weapon;
+    }, 1000);
+
   }
   /********* End Actions  *******************/
 
