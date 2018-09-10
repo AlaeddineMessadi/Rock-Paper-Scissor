@@ -6,11 +6,11 @@ import Weapon from "../Weapon/Weapon";
 const player = ({ label, loading, weapon, score }) => {
   return (
     <div className={ classes.player }>
-      <Weapon type={ weapon } loading={ loading } />
-      <div className={ classes.info }>
-        <span className={ classes.label }>{ label }</span>
-        <span className={ classes.score }>{ score }</span>
+          <div className={ classes.info }>
+        <h3 className={ classes.label }>{ label }</h3>
+        <p className={ classes.score }>Score: { score }</p>
       </div>
+      <Weapon type={ weapon } loading={ loading } />
     </div>
   );
 };

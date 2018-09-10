@@ -1,9 +1,9 @@
 .history {
-  border-left: 4px dotted #ff2e4c;
+  border: 4px dotted #ff2e4c;
 }
 
 .history .border {
-  border-left: 4px dotted #ff2e4c;
+  border-left: 2px solid #ff2e4c;
 }
 
 .history thead {

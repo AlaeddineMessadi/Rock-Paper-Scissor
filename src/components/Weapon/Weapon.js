@@ -32,7 +32,7 @@ const weapon = props => {
           alt="weapon"
         />
       </div>
-      <span>{ props.type }</span>
+      <p className={classes.name}>{ props.type }</p>
     </div>
   );
 };

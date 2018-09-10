@@ -6,9 +6,16 @@
 .weapon .image {
   width: 80%;
   margin: auto;
+  text-align: center;
 }
 
 .weapon img {
   width: 100%;
+  max-width: 450px;
   height: auto;
+}
+
+.weapon .name {
+  text-align: center;
+
 }

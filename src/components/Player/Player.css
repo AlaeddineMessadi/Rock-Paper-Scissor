@@ -1,17 +1,24 @@
 .player {
-  /* display: inline-block; */
   width: 320px;
   flex-grow: 1;
 }
 
-.player>span {
-  vertical-align: middle;
+.player .label {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 10px;
 }
 
 .player .score {
-  border: 1px solid #fff;
-  border-radius: 3px;
-  display: inline-block;
+  border: 1px solid #ff2e4c;
+  background-color: #ff2e4c;
+  border-radius: 5px;
   min-width: 60px;
-  padding: 4px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
 }
