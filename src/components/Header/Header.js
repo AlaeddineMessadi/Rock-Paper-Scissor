@@ -14,7 +14,7 @@ const header = inject("game")(
         <h1 className={ classes.Title }>Rock - Paper - Scissors</h1>
         <div className={ classes.Mode }>
 
-          <Button styleName="btn2" value="Switch Mode" click={ props.game.modeToggler } />
+          <Button styleName="btn2" value="Switch Mode" onClick={ props.game.modeToggler } />
           <h2 className={ classes.subTitle }>{ label.toUpperCase() }</h2>
         </div>
       </header>

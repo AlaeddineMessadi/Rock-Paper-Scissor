@@ -63,6 +63,14 @@ class GameStore {
     };
     this.winner = null;
   }
+
+  // Pick Weapon for user1 (Human)
+  @action
+  pickWeapon(weapon) {
+    console.log('weapon pickedd', weapon)
+  
+    // this.player1.weapon = weapon;
+  }
   /********* End Actions  *******************/
 
   /*************** Methods  *****************/
