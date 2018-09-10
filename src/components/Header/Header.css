@@ -1,14 +1,18 @@
-.Header {
+.header {
   background-color: #1e1548;
   padding: 20px;
   color: white;
   text-align: center;
 }
 
-.Header .Title {
+.header .title {
   font-size: 2rem;
 }
 
-.Header .subTitle {
-    margin-top: 1rem;
+.header .sub_title {
+  margin-top: 1rem;
+}
+
+.header .mode {
+  margin-top: 20px;
 }

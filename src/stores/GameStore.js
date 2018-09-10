@@ -1,4 +1,4 @@
-import { observable, action, autorun } from "mobx";
+import { observable, action, autorun, intercept } from "mobx";
 
 import { modes, modeKeys } from "../constants/MODES";
 import { weapons, weaponKeys } from "../constants/WEAPONS";
@@ -15,12 +15,13 @@ class GameStore {
   history = [];
   @observable
   mode = modeKeys[0];
+  @observable
+  loading = false;
 
   // player1 either Human or Bot
   @observable
   player1 = {
     label: this.modes[this.mode].player1Label,
-    loading: false,
     weapon: null,
     score: 0
   };
@@ -29,7 +30,6 @@ class GameStore {
   @observable
   player2 = {
     label: this.modes[this.mode].player2Label,
-    loading: false,
     weapon: null,
     score: 0
   };
@@ -38,7 +38,9 @@ class GameStore {
   winner = null;
 
   @observable
-  historyMoves = [];
+  tie = false;
+
+
 
   /******************* Actions  ****************/
   // Toggle Game Mode
@@ -57,38 +59,34 @@ class GameStore {
   @action
   reset() {
     this.player1 = {
-      loading: false,
       weapon: null,
       score: 0
     };
     this.player2 = {
-      loading: false,
       weapon: null,
       score: 0
     };
     this.winner = null;
+    this.tie = false;
   }
 
   // Pick Weapon for user1 (Human)
   @action
   pickWeapon(weapon) {
-    this.toggleLoading(true);
+    // reset tie
+    if (this.tie) this.tie = false;
+    this.loading = true;
     setTimeout(() => {
-      this.toggleLoading(false);
+      this.loading = false;
 
       this.player1.weapon = weapon || this.getRandomWeapon();
       this.player2.weapon = this.getRandomWeapon();
 
-      console.log(this.getWinner(this.player1.weapon, this.player2.weapon))
+      this.setWinner(this.player1.weapon, this.player2.weapon);
     }, 1000);
 
   }
 
-  @action
-  toggleLoading = (status) => {
-    this.player1.loading = status;
-    this.player2.loading = status;
-  }
   /********* End Actions  *******************/
 
   /*************** Methods  *****************/
@@ -96,15 +94,22 @@ class GameStore {
     return weaponKeys[(weaponKeys.length * Math.random()) << 0];
   };
 
-  getWinner = (weapon1, weapon2) => {
+  setWinner = (weapon1, weapon2) => {
+    console.log('set winner ')
     if (weapon1 === weapon2) return 0;
-    return weapons[weapon1].wins.some(wins => wins === weapon2) ? this.player1.score++ : this.player1.score++;
+    if (weapons[weapon1].wins.some(wins => wins === weapon2)) { this.incrementPlayerScore(this.player1) }
+    else { this.incrementPlayerScore(this.player2) }
   };
+
+  incrementPlayerScore(player) {
+    player.score = player.score + 1;
+  }
   /*************** End Methods  *****************/
 }
 
 const gameStore = new GameStore();
 
+///logs 
 let loading, weapon, score;
 autorun(() => {
   const { loading, weapon, score } = gameStore.player1;

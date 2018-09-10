@@ -1,20 +1,14 @@
-.Player {
-  display: inline-block;
+.player {
+  /* display: inline-block; */
   width: 320px;
+  flex-grow: 1;
 }
 
-.Player > div {
-  display: inline-block;
-  font-size: 14px;
-  text-align: center;
-  width: 105px;
-}
-
-.Player > span {
+.player>span {
   vertical-align: middle;
 }
 
-.Player .score {
+.player .score {
   border: 1px solid #fff;
   border-radius: 3px;
   display: inline-block;

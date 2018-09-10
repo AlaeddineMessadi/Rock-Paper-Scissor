@@ -7,15 +7,15 @@ const header = inject("game")(
   observer(props => {
 
     const mode = props.game.mode;
-    const  label = props.game.modes[mode].label;
+    const label = props.game.modes[mode].label;
 
     return (
-      <header className={ classes.Header }>
-        <h1 className={ classes.Title }>Rock - Paper - Scissors</h1>
-        <div className={ classes.Mode }>
+      <header className={ classes.header }>
+        <h1 className={ classes.title }>Rock - Paper - Scissors</h1>
+        <div className={ classes.mode }>
 
           <Button styleName="btn2" value="Switch Mode" onClick={ props.game.modeToggler } />
-          <h2 className={ classes.subTitle }>{ label.toUpperCase() }</h2>
+          <h2 className={ classes.sub_title }>{ label.toUpperCase() }</h2>
         </div>
       </header>
     );

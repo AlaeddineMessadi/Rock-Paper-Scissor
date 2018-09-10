@@ -1,20 +1,14 @@
-.Weapon {
-  height: 60px;
-  background-color: #fff;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  display: inline-block;
-  color: #4b6a90;
-  font-size: 60px;
-  height: 60px;
-  line-height: 60px;
-  padding: 20px;
-  text-align: center;
-  width: 60px;
+.weapon {
+  width: 100%;
+  margin: auto;
 }
-.Weapon.empty {
-  background-color: transparent;
-  border: 2px dashed #fff;
-  color: #fff;
-  font-size: 30px;
+
+.weapon .image {
+  width: 80%;
+  margin: auto;
+}
+
+.weapon img {
+  width: 100%;
+  height: auto;
 }

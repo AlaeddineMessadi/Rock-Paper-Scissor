@@ -3,6 +3,7 @@ import { observer, inject } from "mobx-react";
 import { observable } from "mobx";
 
 import Player from "../../components/Player/Player";
+import History from "../../components/History/History";
 
 import classes from "./Game.css";
 
@@ -14,15 +15,15 @@ export class Game extends Component {
     return (
       <main className={ classes.Game }>
         { players.map((player, index) => (
-          <div className={ classes.Player } key={ index }>
-            <Player
-              label={ player.label }
-              weapon={ player.weapon }
-              score={ player.score }
-              loading={ player.loading }
-            />
-          </div>
+          <Player
+            key={ index }
+            label={ player.label }
+            weapon={ player.weapon }
+            score={ player.score }
+            loading={ this.props.game.loading }
+          />
         )) }
+        <History />
       </main>
     );
   }

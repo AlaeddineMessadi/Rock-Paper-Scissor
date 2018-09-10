@@ -24,10 +24,14 @@ const weapon = props => {
     }
   };
 
-  console.log(props.loading)
   return (
-    <div>
-      <img src={ props.loading ? loading : choseWeapon() } />
+    <div className={ classes.weapon }>
+      <div className={ classes.image }>
+        <img
+          src={ props.loading ? loading : choseWeapon() }
+          alt="weapon"
+        />
+      </div>
       <span>{ props.type }</span>
     </div>
   );
