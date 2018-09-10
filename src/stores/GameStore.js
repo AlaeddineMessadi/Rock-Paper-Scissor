@@ -82,11 +82,16 @@ class GameStore {
       this.player1.weapon = weapon || this.getRandomWeapon();
       this.player2.weapon = this.getRandomWeapon();
 
-      this.setWinner(this.player1.weapon, this.player2.weapon);
+      const winner = this.setWinner(this.player1.weapon, this.player2.weapon);
+
+      // push to history
+      this.history.push({
+        player1: this.player1.weapon,
+        player2: this.player2.weapon,
+        winner
+      });
     }, 1000);
-
   }
-
   /********* End Actions  *******************/
 
   /*************** Methods  *****************/
@@ -95,14 +100,17 @@ class GameStore {
   };
 
   setWinner = (weapon1, weapon2) => {
-    console.log('set winner ')
-    if (weapon1 === weapon2) return 0;
-    if (weapons[weapon1].wins.some(wins => wins === weapon2)) { this.incrementPlayerScore(this.player1) }
-    else { this.incrementPlayerScore(this.player2) }
+    if (weapon1 === weapon2) {
+      this.tie = true;
+      return "tie";
+    }
+    return weapons[weapon1].wins.some(wins => wins === weapon2) ? this.incrementPlayerScore(this.player1) : this.incrementPlayerScore(this.player2);
   };
 
+  // increment and return true
   incrementPlayerScore(player) {
     player.score = player.score + 1;
+    return player.label;
   }
   /*************** End Methods  *****************/
 }
