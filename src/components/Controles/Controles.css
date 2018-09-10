@@ -1,0 +1,25 @@
+.Container {
+  height: 100px;
+  text-align: center;
+  background-color: #2e99b0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.Container ul {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.Container li {
+  flex-grow: 1;
+  padding: 1rem;
+}
+

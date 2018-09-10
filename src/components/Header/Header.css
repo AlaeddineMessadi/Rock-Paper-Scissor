@@ -1,0 +1,10 @@
+.Header {
+  background-color: #1e1548;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.Header .Title {
+  font-size: 2rem;
+}
