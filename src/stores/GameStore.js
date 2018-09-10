@@ -1,8 +1,7 @@
-import { observable, computed, action, autorun } from "mobx";
+import { observable, action, autorun } from "mobx";
 
 import { modes, modeKeys } from "../constants/MODES";
 import { weapons, weaponKeys } from "../constants/WEAPONS";
-
 
 class GameStore {
   /** Constants */
@@ -15,15 +14,19 @@ class GameStore {
   @observable
   mode = modeKeys[0];
 
+  // player1 either Human or Bot
   @observable
   player1 = {
+    label: this.modes[this.mode].player1Label,
     loading: false,
     weapon: null,
     score: 0
   };
 
+  // player2 is always a Bot
   @observable
   player2 = {
+    label: this.modes[this.mode].player2Label,
     loading: false,
     weapon: null,
     score: 0
@@ -39,8 +42,11 @@ class GameStore {
   // Toggle Game Mode
   @action
   modeToggler = () => {
-    this.mode = this.mode === this.modeKeys[0] ? this.modeKeys[1] : this.modeKeys[0]
-  }
+    this.mode =
+      this.mode === this.modeKeys[0] ? this.modeKeys[1] : this.modeKeys[0];
+    this.player1.label = this.modes[this.mode].player1Label;
+    this.player2.label = this.modes[this.mode].player2Label;
+  };
 
   // reset the game
   @action
@@ -59,7 +65,6 @@ class GameStore {
   }
   /********* End Actions  *******************/
 
-
   /*************** Methods  *****************/
   getRandomWeapon = () => {
     return weaponKeys[(weaponKeys.length * Math.random()) << 0];
@@ -70,7 +75,6 @@ class GameStore {
     return weapons[weapon1].wins.some(wins => wins === weapon2) ? 1 : 2;
   };
   /*************** End Methods  *****************/
-
 }
 
 const gameStore = new GameStore();
@@ -78,11 +82,18 @@ const gameStore = new GameStore();
 let loading, weapon, score;
 autorun(() => {
   const { loading, weapon, score } = gameStore.player1;
-  console.log("Player 1");
-  console.log("loading: " + gameStore.player1.loading, "  |  weapon: " + gameStore.player1.weapon, "  |  score: " + gameStore.player1.score);
-  console.log("Player 2");
-  console.log("loading: " + gameStore.player2.loading, "  |  weapon: " + gameStore.player2.weapon, "  |  score: " + gameStore.player2.score);
-
+  console.log(gameStore.player1.label);
+  console.log(
+    "loading: " + gameStore.player1.loading,
+    "  |  weapon: " + gameStore.player1.weapon,
+    "  |  score: " + gameStore.player1.score
+  );
+  console.log(gameStore.player2.label);
+  console.log(
+    "loading: " + gameStore.player2.loading,
+    "  |  weapon: " + gameStore.player2.weapon,
+    "  |  score: " + gameStore.player2.score
+  );
 });
 
 export default gameStore;

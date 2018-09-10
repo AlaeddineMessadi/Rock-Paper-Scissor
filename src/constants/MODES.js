@@ -1,13 +1,13 @@
 const modes = {
     vs: {
-      label: "PLAYER VS COMPUTER",
-      player1Label: "COMPUTER",
-      player2Label: "PLAYER"
+      label: "HUMAN VS ROBOT",
+      player1Label: "HUMAN",
+      player2Label: "ROBOT"
     },
     simulate: {
       label: "COMPUTER VS COMPUTER",
-      player1Label: "COMPUTER 1",
-      player2Label: "COMPUTER 2"
+      player1Label: "ROBOT 1",
+      player2Label: "ROBOT 2"
     }
   },
   modeKeys = Object.keys(modes);

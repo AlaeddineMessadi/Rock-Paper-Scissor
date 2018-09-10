@@ -1,0 +1,13 @@
+.Game {
+  display: flex;
+  min-height: 200px;
+}
+.Game .Player {
+  flex: 1;
+}
+
+@media (max-width: 400px) {
+  .Game {
+    display: block;
+  }
+}

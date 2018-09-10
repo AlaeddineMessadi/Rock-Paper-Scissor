@@ -6,9 +6,9 @@ import classes from "./Header.css";
 const header = inject("game")(
   observer(props => {
 
-    const mode = props.game.mode,
-      label = props.game.modes[mode].label;
-    console.log(props.game.mode)
+    const mode = props.game.mode;
+    const  label = props.game.modes[mode].label;
+
     return (
       <header className={ classes.Header }>
         <h1 className={ classes.Title }>Rock - Paper - Scissors</h1>
