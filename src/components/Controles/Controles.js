@@ -12,14 +12,14 @@ const controles = inject("game")(
           <ul>
             { gameStore.weaponKeys.map((weapon, index) => (
               <li key={ index }>
-                <Button styleName="btn1" value={ weapon } onClick={() => gameStore.pickWeapon(weapon)}/>
+                <Button styleName="btn1" value={ weapon } onClick={ () => gameStore.pickWeapon(weapon) } />
               </li>
             )) }
           </ul>
         ) : (
             <ul>
               <li>
-                <Button styleName="btn1" value="Play" onClick={gameStore.autoPlay} />
+                <Button styleName="btn1" value="Play" onClick={ () => gameStore.pickWeapon() } />
               </li>
             </ul>
           ) }

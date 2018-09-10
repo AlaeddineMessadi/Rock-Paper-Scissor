@@ -68,9 +68,13 @@ class GameStore {
   @action
   pickWeapon(weapon) {
     this.player1.loading = true;
+    this.player2.loading = true;
     setTimeout(() => {
       this.player1.loading = false;
-      this.player1.weapon = weapon;
+      this.player2.loading = false;
+
+      this.player1.weapon = weapon || this.getRandomWeapon();
+      this.player2.weapon = this.getRandomWeapon();
     }, 1000);
 
   }
