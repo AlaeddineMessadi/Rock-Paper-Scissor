@@ -3,6 +3,10 @@ import { observable, action, autorun, intercept } from "mobx";
 import { modes, modeKeys } from "../constants/MODES";
 import { weapons, weaponKeys } from "../constants/WEAPONS";
 
+
+const localStorage = window.localStorage;
+
+
 class GameStore {
   /** Constants */
   modes = modes;
@@ -48,11 +52,10 @@ class GameStore {
   modeToggler = () => {
     this.mode =
       this.mode === this.modeKeys[0] ? this.modeKeys[1] : this.modeKeys[0];
+      // reset 
     this.reset();
     this.player1.label = this.modes[this.mode].player1Label;
     this.player2.label = this.modes[this.mode].player2Label;
-
-
   };
 
   // reset the game
@@ -68,6 +71,9 @@ class GameStore {
     };
     this.winner = null;
     this.tie = false;
+
+    // clear history
+    localStorage.removeItem('rps_history');
   }
 
   // Pick Weapon for user1 (Human)
@@ -90,6 +96,9 @@ class GameStore {
         player2: this.player2.weapon,
         winner
       });
+
+      // update history in browser localStorage
+      // localStorage.addItem('rps_history', this.history);
     }, 1000);
   }
   /********* End Actions  *******************/
@@ -120,19 +129,21 @@ const gameStore = new GameStore();
 ///logs 
 let loading, weapon, score;
 autorun(() => {
-  const { loading, weapon, score } = gameStore.player1;
-  console.log(gameStore.player1.label);
-  console.log(
-    "loading: " + gameStore.player1.loading,
-    "  |  weapon: " + gameStore.player1.weapon,
-    "  |  score: " + gameStore.player1.score
-  );
-  console.log(gameStore.player2.label);
-  console.log(
-    "loading: " + gameStore.player2.loading,
-    "  |  weapon: " + gameStore.player2.weapon,
-    "  |  score: " + gameStore.player2.score
-  );
+  // const { loading, weapon, score } = gameStore.player1;
+  // console.log(gameStore.player1.label);
+  // console.log(
+  //   "loading: " + gameStore.player1.loading,
+  //   "  |  weapon: " + gameStore.player1.weapon,
+  //   "  |  score: " + gameStore.player1.score
+  // );
+  // console.log(gameStore.player2.label);
+  // console.log(
+  //   "loading: " + gameStore.player2.loading,
+  //   "  |  weapon: " + gameStore.player2.weapon,
+  //   "  |  score: " + gameStore.player2.score
+  // );
+
+  // console.log(gameStore.history);
 });
 
 export default gameStore;

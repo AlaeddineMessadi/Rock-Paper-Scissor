@@ -3,7 +3,8 @@
 }
 
 .history .border {
-  border-left: 2px solid #ff2e4c;
+  border-left: 2px solid #ffffff;
+  padding: 0;
 }
 
 .history thead {
@@ -25,6 +26,20 @@
   margin-bottom: 25px;
 }
 
-.history td .active {
+.history tbody td {
+  color: #ffffff;
+  padding: 10px;
+  text-align: center;
+}
+
+.history .tie {
+  background-color: #1e1548;
+}
+
+.history .win {
   background-color: #2e99b0;
+}
+
+.history .lose {
+  background-color: #ff2e4c;
 }
