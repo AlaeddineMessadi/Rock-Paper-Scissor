@@ -5,6 +5,8 @@ import { observable } from "mobx";
 import Player from "../../components/Player/Player";
 import History from "../../components/History/History";
 
+import Aux from '../../hoc/Aux';
+
 import classes from "./Game.css";
 
 @inject("game")
@@ -15,8 +17,11 @@ export class Game extends Component {
       p1: this.props.game.player1, 
       p2: this.props.game.player2
     };
+    const tie = `${classes.tie} ${players.p1.weapon === players.p2.weapon && null !== players.p1.weapon  ? classes.show : ''}`;
     return (
-      <main className={ classes.Game }>
+      <Aux>
+      <div className={tie}>Tie!</div>
+      <main className={ classes.game }>
         <Player
             label={ players.p1.label }
             weapon={ players.p1.weapon }
@@ -31,6 +36,7 @@ export class Game extends Component {
             loading={ this.props.game.loading }
           />
       </main>
+      </Aux>
     );
   }
 }
