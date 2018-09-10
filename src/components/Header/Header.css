@@ -8,3 +8,7 @@
 .Header .Title {
   font-size: 2rem;
 }
+
+.Header .subTitle {
+    margin-top: 1rem;
+}

@@ -5,16 +5,16 @@ import classes from "./Header.css";
 
 const header = inject("game")(
   observer(props => {
+
+    console.log(props.game.modes);
+    console.log(props.game.mode)
     return (
       <header className={classes.Header}>
         <h1 className={classes.Title}>Rock - Paper - Scissors</h1>
         <div className={classes.Mode}>
-          <a className={classes.btnPlay}>
-            <h2>{props.game.mode.toUpperCase()}</h2>
-          </a>
-          <div>
-            <Button styleName="btn2" value={props.game.mode}/>
-          </div>
+
+            <Button styleName="btn2" value="Switch Mode"/>
+            <h2 className={classes.subTitle}>{props.game.mode.toUpperCase()}</h2>
         </div>
       </header>
     );
