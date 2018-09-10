@@ -12,6 +12,8 @@ class GameStore {
 
   /** Observables */
   @observable
+  history = [];
+  @observable
   mode = modeKeys[0];
 
   // player1 either Human or Bot
@@ -44,8 +46,11 @@ class GameStore {
   modeToggler = () => {
     this.mode =
       this.mode === this.modeKeys[0] ? this.modeKeys[1] : this.modeKeys[0];
+    this.reset();
     this.player1.label = this.modes[this.mode].player1Label;
     this.player2.label = this.modes[this.mode].player2Label;
+
+
   };
 
   // reset the game
@@ -67,16 +72,22 @@ class GameStore {
   // Pick Weapon for user1 (Human)
   @action
   pickWeapon(weapon) {
-    this.player1.loading = true;
-    this.player2.loading = true;
+    this.toggleLoading(true);
     setTimeout(() => {
-      this.player1.loading = false;
-      this.player2.loading = false;
+      this.toggleLoading(false);
 
       this.player1.weapon = weapon || this.getRandomWeapon();
       this.player2.weapon = this.getRandomWeapon();
+
+      console.log(this.getWinner(this.player1.weapon, this.player2.weapon))
     }, 1000);
 
+  }
+
+  @action
+  toggleLoading = (status) => {
+    this.player1.loading = status;
+    this.player2.loading = status;
   }
   /********* End Actions  *******************/
 
@@ -87,7 +98,7 @@ class GameStore {
 
   getWinner = (weapon1, weapon2) => {
     if (weapon1 === weapon2) return 0;
-    return weapons[weapon1].wins.some(wins => wins === weapon2) ? 1 : 2;
+    return weapons[weapon1].wins.some(wins => wins === weapon2) ? this.player1.score++ : this.player1.score++;
   };
   /*************** End Methods  *****************/
 }
