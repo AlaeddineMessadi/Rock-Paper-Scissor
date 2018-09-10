@@ -6,7 +6,7 @@
 }
 
 .header .title {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .header .sub_title {
@@ -14,5 +14,15 @@
 }
 
 .header .mode {
-  margin-top: 20px;
+  margin-top: 10px;
+}
+
+@media (min-width: 572px) {
+  .header .title {
+    font-size: 2rem;
+  }
+
+  .header .mode {
+    margin-top: 20px;
+  }
 }
