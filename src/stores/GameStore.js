@@ -37,10 +37,10 @@ class GameStore {
 
   /******************* Actions  ****************/
   // Toggle Game Mode
-@action
-modeToggler() {
-  this.mode = this.mode === this.mode[0] ? this.mode[1] : this.mode[0]
-}
+  @action
+  modeToggler = () => {
+    this.mode = this.mode === this.modeKeys[0] ? this.modeKeys[1] : this.modeKeys[0]
+  }
 
   // reset the game
   @action
@@ -78,9 +78,9 @@ const gameStore = new GameStore();
 let loading, weapon, score;
 autorun(() => {
   const { loading, weapon, score } = gameStore.player1;
-  console.log ("Player 1");
+  console.log("Player 1");
   console.log("loading: " + gameStore.player1.loading, "  |  weapon: " + gameStore.player1.weapon, "  |  score: " + gameStore.player1.score);
-  console.log ("Player 2");
+  console.log("Player 2");
   console.log("loading: " + gameStore.player2.loading, "  |  weapon: " + gameStore.player2.weapon, "  |  score: " + gameStore.player2.score);
 
 });

@@ -6,22 +6,22 @@ import Button from "../Button/Button";
 const controles = inject("game")(
   observer(props => {
     return (
-      <footer className={classes.Container}>
-        {props.game.mode === "vs" ? (
+      <footer className={ classes.Container }>
+        { props.game.mode === "vs" ? (
           <ul>
-            {props.game.weaponKeys.map((weapon, index) => (
-              <li key={index}>
-                <Button styleName="btn1" value={weapon} />
+            { props.game.weaponKeys.map((weapon, index) => (
+              <li key={ index }>
+                <Button styleName="btn1" value={ weapon } />
               </li>
-            ))}
+            )) }
           </ul>
         ) : (
-          <ul>
-            <li>
-              <a href={null}>Play</a>
-            </li>
-          </ul>
-        )}
+            <ul>
+              <li>
+                <Button styleName="btn1" value="Play" />
+              </li>
+            </ul>
+          ) }
       </footer>
     );
   })

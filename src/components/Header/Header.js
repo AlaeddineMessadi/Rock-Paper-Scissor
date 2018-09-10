@@ -6,15 +6,16 @@ import classes from "./Header.css";
 const header = inject("game")(
   observer(props => {
 
-    console.log(props.game.modes);
+    const mode = props.game.mode,
+      label = props.game.modes[mode].label;
     console.log(props.game.mode)
     return (
-      <header className={classes.Header}>
-        <h1 className={classes.Title}>Rock - Paper - Scissors</h1>
-        <div className={classes.Mode}>
+      <header className={ classes.Header }>
+        <h1 className={ classes.Title }>Rock - Paper - Scissors</h1>
+        <div className={ classes.Mode }>
 
-            <Button styleName="btn2" value="Switch Mode"/>
-            <h2 className={classes.subTitle}>{props.game.mode.toUpperCase()}</h2>
+          <Button styleName="btn2" value="Switch Mode" click={ props.game.modeToggler } />
+          <h2 className={ classes.subTitle }>{ label.toUpperCase() }</h2>
         </div>
       </header>
     );
