@@ -1,18 +1,17 @@
 .weapon {
   width: 100%;
+  max-height: 300px;
   margin: auto;
 }
 
 .weapon .image {
-  width: 80%;
   margin: auto;
   text-align: center;
 }
 
 .weapon img {
+  max-height: 300px;
   width: 100%;
-  max-width: 450px;
-  height: auto;
 }
 
 .weapon .name {

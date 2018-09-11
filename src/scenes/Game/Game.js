@@ -35,6 +35,7 @@ export class Game extends Component {
           <History />
           <Player
             id="player2"
+            order={ 3 }
             label={ players.p2.label }
             weapon={ players.p2.weapon }
             score={ players.p2.score }

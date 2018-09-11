@@ -1,6 +1,16 @@
 .player {
-  width: 320px;
+  min-width: 205px;
+  max-height: 400px;
+  margin-bottom: 10px;
   flex-grow: 1;
+}
+
+.player.order1 {
+  order: 1;
+}
+
+.player.order3 {
+  order: 3;
 }
 
 .player .label {
@@ -21,4 +31,10 @@
   font-size: 1rem;
   font-weight: 400;
   text-align: center;
+}
+
+@media (max-width: 410px) {
+  .player {
+    min-width: 100px;
+  }
 }

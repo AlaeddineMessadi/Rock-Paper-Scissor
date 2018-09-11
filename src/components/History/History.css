@@ -1,5 +1,11 @@
 .history {
   border: 4px dotted #ff2e4c;
+  order: 4;
+  flex-grow: 1;
+}
+
+.history table {
+  width: 100%;
 }
 
 .history .border {
@@ -42,4 +48,11 @@
 
 .history .lose {
   background-color: #ff2e4c;
+}
+
+@media (min-width: 572px) {
+  .history {
+    order: 2;
+    flex-grow: 0;
+  }
 }
