@@ -14,7 +14,7 @@ const controles = inject("game")(
         { gameStore.mode === "vs" ? (
           <ul>
             { weaponKeys.map((weapon, index) => (
-              <li key={ index }>
+              <li key={ index } id={ weapon }>
                 <Button styleName="btn1" value={ weapon } onClick={ () => gameStore.pickWeapon(weapon) } />
               </li>
             )) }

@@ -3,10 +3,10 @@ import classes from "./Player.css";
 
 import Weapon from "../Weapon/Weapon";
 
-const player = ({ label, loading, weapon, score }) => {
+const player = ({ id, label, loading, weapon, score }) => {
   return (
-    <div className={ classes.player }>
-          <div className={ classes.info }>
+    <div className={ classes.player } id={ id }>
+      <div className={ classes.info }>
         <h3 className={ classes.label }>{ label }</h3>
         <p className={ classes.score }>Score: { score }</p>
       </div>

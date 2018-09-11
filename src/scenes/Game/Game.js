@@ -26,6 +26,7 @@ export class Game extends Component {
         <div className={ tie }>Tie!</div>
         <main className={ classes.game }>
           <Player
+            id="player1"
             label={ players.p1.label }
             weapon={ players.p1.weapon }
             score={ players.p1.score }
@@ -33,6 +34,7 @@ export class Game extends Component {
           />
           <History />
           <Player
+            id="player2"
             label={ players.p2.label }
             weapon={ players.p2.weapon }
             score={ players.p2.score }
