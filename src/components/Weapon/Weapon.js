@@ -37,8 +37,4 @@ const weapon = props => {
   );
 };
 
-// Weapon.propTypes = {
-// 	icon: PropTypes.string,
-// };
-
 export default weapon;

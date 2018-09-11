@@ -20,3 +20,9 @@
   font-size: 1.2rem;
   text-transform: uppercase;
 }
+
+@media (max-width: 572px) {
+  .weapon {
+    max-width: 175px;
+  }
+}

@@ -24,7 +24,6 @@ const history = inject('game')(
               {
                 records.map((record, index) => {
                   let tie, p1Status, p2Status;
-
                   switch (record.winner) {
                     case label1:
                       p1Status = classes.win;

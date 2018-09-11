@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, toJS } from "mobx";
 import store from 'store';
 
 
@@ -68,7 +68,7 @@ class GameStore {
     this.history = { mode: this.mode, records: [] };
   }
 
-  // Pick Weapon for user1 (Human)
+  // Pick Weapon for user1 (Human) user2 is always Robot
   @action
   pickWeapon = (weapon) => {
     // reset tie
@@ -80,7 +80,7 @@ class GameStore {
       this.player1.weapon = weapon || this.getRandomWeapon();
       this.player2.weapon = this.getRandomWeapon();
 
-      const winner = this.setWinner(this.player1.weapon, this.player2.weapon);
+      const winner = this.chooseWinner(this.player1.weapon, this.player2.weapon);
 
       // push to history
       this.pushResultInHistory(this.player1, this.player2, winner);
@@ -90,14 +90,15 @@ class GameStore {
 
   @action
   pushResultInHistory = (player1, player2, winner) => {
+
     this.history.records.push({
-      player1: { weapon: player1.weapon, score: player1.score },
-      player2: { weapon: player2.weapon, score: player2.score },
-      winner
+      player1: toJS(player1),
+      player2: toJS(player2),
+      winner,
     });
 
     // autosave history in the localStorage
-    store.set('history', this.history);
+    store.set('history', toJS(this.history));
   }
 
   // autosave in localstorage
@@ -110,13 +111,9 @@ class GameStore {
       // update history from localStorage
       this.history = existingHistory;
 
-      // update players score from localStorage
-      this.player1.score = lastRecord.player1.score;
-      this.player2.score = lastRecord.player2.score;
-
-      // update last selected weapon
-      this.player1.weapon = lastRecord.player1.weapon;
-      this.player2.weapon = lastRecord.player2.weapon;
+      // update players score and weapon from localStorage
+      this.player1 = lastRecord.player1;
+      this.player2 = lastRecord.player2;
 
       // last mode selected
       this.mode = existingHistory.mode;
@@ -130,7 +127,7 @@ class GameStore {
     return weaponKeys[(weaponKeys.length * Math.random()) << 0];
   };
 
-  setWinner = (weapon1, weapon2) => {
+  chooseWinner = (weapon1, weapon2) => {
     if (weapon1 === weapon2) {
       this.tie = true;
       return "tie";
