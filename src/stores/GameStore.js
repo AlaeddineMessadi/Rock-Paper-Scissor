@@ -1,31 +1,24 @@
-import { observable, action, autorun, intercept } from "mobx";
+import { observable, action } from "mobx";
+import store from 'store';
+
 
 import { modes, modeKeys } from "../constants/MODES";
 import { weapons, weaponKeys } from "../constants/WEAPONS";
 
 
-const localStorage = window.localStorage;
-
 
 class GameStore {
-  /** Constants */
-  modes = modes;
-  modeKeys = modeKeys;
-  weapons = weapons;
-  weaponKeys = weaponKeys;
-
   /** Observables */
   @observable
-  history = [];
-  @observable
   mode = modeKeys[0];
+
   @observable
   loading = false;
 
   // player1 either Human or Bot
   @observable
   player1 = {
-    label: this.modes[this.mode].player1Label,
+    label: modes[this.mode].player1Label,
     weapon: null,
     score: 0
   };
@@ -33,7 +26,7 @@ class GameStore {
   // player2 is always a Bot
   @observable
   player2 = {
-    label: this.modes[this.mode].player2Label,
+    label: modes[this.mode].player2Label,
     weapon: null,
     score: 0
   };
@@ -44,18 +37,17 @@ class GameStore {
   @observable
   tie = false;
 
-
+  @observable
+  history = { mode: this.mode, records: [] };
 
   /******************* Actions  ****************/
   // Toggle Game Mode
   @action
   modeToggler = () => {
     this.mode =
-      this.mode === this.modeKeys[0] ? this.modeKeys[1] : this.modeKeys[0];
-      // reset 
+      this.mode === modeKeys[0] ? modeKeys[1] : modeKeys[0];
+    // reset 
     this.reset();
-    this.player1.label = this.modes[this.mode].player1Label;
-    this.player2.label = this.modes[this.mode].player2Label;
   };
 
   // reset the game
@@ -71,14 +63,14 @@ class GameStore {
     };
     this.winner = null;
     this.tie = false;
-
-    // clear history
-    localStorage.removeItem('rps_history');
+    this.player1.label = modes[this.mode].player1Label;
+    this.player2.label = modes[this.mode].player2Label;
+    this.history = { mode: this.mode, records: [] };
   }
 
   // Pick Weapon for user1 (Human)
   @action
-  pickWeapon(weapon) {
+  pickWeapon = (weapon) => {
     // reset tie
     if (this.tie) this.tie = false;
     this.loading = true;
@@ -91,16 +83,46 @@ class GameStore {
       const winner = this.setWinner(this.player1.weapon, this.player2.weapon);
 
       // push to history
-      this.history.push({
-        player1: this.player1.weapon,
-        player2: this.player2.weapon,
-        winner
-      });
+      this.pushResultInHistory(this.player1, this.player2, winner);
 
-      // update history in browser localStorage
-      // localStorage.addItem('rps_history', this.history);
     }, 1000);
   }
+
+  @action
+  pushResultInHistory = (player1, player2, winner) => {
+    this.history.records.push({
+      player1: { weapon: player1.weapon, score: player1.score },
+      player2: { weapon: player2.weapon, score: player2.score },
+      winner
+    });
+
+    // autosave history in the localStorage
+    store.set('history', this.history);
+  }
+
+  // autosave in localstorage
+  initHistory = () => {
+    const existingHistory = store.get("history");
+
+    if (existingHistory) {
+      const lastRecord = existingHistory.records.pop();
+
+      // update history from localStorage
+      this.history = existingHistory;
+
+      // update players score from localStorage
+      this.player1.score = lastRecord.player1.score;
+      this.player2.score = lastRecord.player2.score;
+
+      // update last selected weapon
+      this.player1.weapon = lastRecord.player1.weapon;
+      this.player2.weapon = lastRecord.player2.weapon;
+
+      // last mode selected
+      this.mode = existingHistory.mode;
+    }
+  }
+
   /********* End Actions  *******************/
 
   /*************** Methods  *****************/
@@ -117,33 +139,15 @@ class GameStore {
   };
 
   // increment and return true
-  incrementPlayerScore(player) {
+  incrementPlayerScore = (player) => {
     player.score = player.score + 1;
     return player.label;
   }
   /*************** End Methods  *****************/
 }
 
+// Initialize GameStore
 const gameStore = new GameStore();
 
-///logs 
-let loading, weapon, score;
-autorun(() => {
-  // const { loading, weapon, score } = gameStore.player1;
-  // console.log(gameStore.player1.label);
-  // console.log(
-  //   "loading: " + gameStore.player1.loading,
-  //   "  |  weapon: " + gameStore.player1.weapon,
-  //   "  |  score: " + gameStore.player1.score
-  // );
-  // console.log(gameStore.player2.label);
-  // console.log(
-  //   "loading: " + gameStore.player2.loading,
-  //   "  |  weapon: " + gameStore.player2.weapon,
-  //   "  |  score: " + gameStore.player2.score
-  // );
-
-  // console.log(gameStore.history);
-});
 
 export default gameStore;

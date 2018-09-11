@@ -3,6 +3,9 @@ import { observer, inject } from "mobx-react";
 import classes from "./Controles.css";
 import Button from "../Button/Button";
 
+import { weaponKeys } from "../../constants/WEAPONS";
+
+
 const controles = inject("game")(
   observer(props => {
     const gameStore = props.game;
@@ -10,7 +13,7 @@ const controles = inject("game")(
       <footer className={ classes.Container }>
         { gameStore.mode === "vs" ? (
           <ul>
-            { gameStore.weaponKeys.map((weapon, index) => (
+            { weaponKeys.map((weapon, index) => (
               <li key={ index }>
                 <Button styleName="btn1" value={ weapon } onClick={ () => gameStore.pickWeapon(weapon) } />
               </li>

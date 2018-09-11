@@ -8,8 +8,8 @@ const history = inject('game')(
     (props) => {
       const label1 = props.game.player1.label;
       const label2 = props.game.player2.label;
-      const history = props.game.history;
-      console.log(history);
+      const records = props.game.history.records;
+
       return (
         <aside className={ classes.history }>
           <table>
@@ -22,31 +22,31 @@ const history = inject('game')(
             </thead>
             <tbody>
               {
-                history.map((point, index) =>  { 
-                  let tie , p1Status, p2Status;
-                  
-                  switch (point.winner) {
-                    case label1: 
+                records.map((record, index) => {
+                  let tie, p1Status, p2Status;
+
+                  switch (record.winner) {
+                    case label1:
                       p1Status = classes.win;
-                      p2Status= classes.lose;
+                      p2Status = classes.lose;
                       break;
-                    case label2: 
+                    case label2:
                       p2Status = classes.win;
-                      p1Status= classes.lose;
+                      p1Status = classes.lose;
                       break;
                     default:
                       tie = classes.tie;
                       break;
                   }
-                  
+
                   return (
-                  <tr className={tie} key={index}>
-                    <td className={ p1Status }>{ point.player1 }</td>
-                    <td className={ classes.border }></td>
-                    <td className={ p2Status }>{ point.player2 }</td>
-                  </tr>
-                
-                )})
+                    <tr className={ tie } key={ index }>
+                      <td className={ p1Status }>{ record.player1.weapon }</td>
+                      <td className={ classes.border }></td>
+                      <td className={ p2Status }>{ record.player2.weapon }</td>
+                    </tr>
+                  )
+                })
               }
 
             </tbody>
