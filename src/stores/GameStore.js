@@ -106,7 +106,7 @@ class GameStore {
     const existingHistory = store.get("history");
 
     if (existingHistory) {
-      const lastRecord = existingHistory.records.pop();
+      const lastRecord = existingHistory.records[existingHistory.records.length - 1];
 
       // update history from localStorage
       this.history = existingHistory;
