@@ -27,6 +27,11 @@ This project is build up on create-react-app starter
 
 Run `yarn test`
 
+
+## Contribution
+All PR's are welcome :)
+
+
 ## Built With
 * [Reactjs](https://reactjs.org/) - The web framework used
 * [Mobx](http://mobx.js.org) - State Management
