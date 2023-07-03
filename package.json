@@ -30,7 +30,7 @@
     "fs-extra": "3.0.1",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "2.29.0",
-    "jest": "24.0.0",
+    "jest": "25.0.0",
     "mobx": "^5.15.7",
     "mobx-react": "^5.2.6",
     "object-assign": "4.1.1",
